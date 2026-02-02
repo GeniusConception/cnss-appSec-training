@@ -1,0 +1,61 @@
+name: AppSec Security Pipeline with SonarQube
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-scan:
+    name: Build and Analyze
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: 'zulu' # SonarScanner a besoin de Java
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Important pour l'analyse de l'historique par Sonar
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install SonarScanner
+      run: |
+        dotnet tool install --global dotnet-sonarscanner
+
+    # 1. Début de l'analyse Sonar
+    # On utilise les secrets pour l'authentification
+    - name: SonarQube Begin
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        dotnet-sonarscanner begin /k:"${{ secrets.SONAR_PROJECT_KEY }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
+
+    # 2. Audit des dépendances (SCA)
+    - name: Check for vulnerable NuGet packages
+      run: dotnet list package --vulnerable --include-transitive
+
+    # 3. Compilation (C'est durant cette phase que Sonar analyse le code)
+    - name: Build
+      run: dotnet build --configuration Release
+
+    # 4. Fin de l'analyse et envoi des résultats
+    - name: SonarQube End
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+    # 5. Tests unitaires
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
