@@ -85,13 +85,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // --- Lab 3 : Endpoint de Génération de Token (Pour la démo) ---
-app.MapGet("/api/auth/token", (string userId) => 
+app.MapGet("/api/auth/token", (string userId, string? scope = null) => 
 {
     var claims = new[]
     {
         new Claim(JwtRegisteredClaimNames.Sub, userId),
         new Claim(JwtRegisteredClaimNames.UniqueName, userId),
-        new Claim("scope", "dossier.read"),
+        new Claim("scope", scope ?? "dossier.read"),
         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
     };
 
