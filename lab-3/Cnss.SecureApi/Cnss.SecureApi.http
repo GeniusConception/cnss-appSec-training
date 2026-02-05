@@ -1,0 +1,6 @@
+@Cnss.SecureApi_HostAddress = http://localhost:5064
+
+GET {{Cnss.SecureApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
