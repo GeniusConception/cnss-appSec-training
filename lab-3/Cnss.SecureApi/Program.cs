@@ -72,6 +72,7 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 
 app.UseExceptionHandler();
+app.UseHttpsRedirection();
 
 app.UseCors("CnssPortalPolicy");
 app.UseAuthentication();
@@ -82,7 +83,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
 
 // --- Lab 3 : Endpoint de Génération de Token (Pour la démo) ---
 app.MapGet("/api/auth/token", (string userId, string? scope = null) => 
@@ -100,7 +100,7 @@ app.MapGet("/api/auth/token", (string userId, string? scope = null) =>
     var tokenDescriptor = new SecurityTokenDescriptor
     {
         Subject = new ClaimsIdentity(claims),
-        Expires = DateTime.UtcNow.AddHours(1),
+        Expires = DateTime.UtcNow.AddMinutes(15),
         Issuer = "cnss-auth-server",
         Audience = "cnss-api",
         SigningCredentials = credentials
