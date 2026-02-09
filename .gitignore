@@ -78,6 +78,10 @@ ClientBin/
 *.pfx
 *.publishsettings
 orleans.codegenerator.cs
+# SQLite
+*.db
+*.db-shm
+*.db-wal
 
 # Since we are using Gemini agent
 .gemini/
