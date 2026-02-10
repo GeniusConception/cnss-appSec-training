@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Cnss.HmacClient/Cnss.HmacClient.csproj" />
+  <Project Path="Cnss.HmacServer/Cnss.HmacServer.csproj" />
+</Solution>
