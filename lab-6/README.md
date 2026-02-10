@@ -36,7 +36,7 @@ L'avantage du mode **Self-Contained** est que l'application embarque son propre 
 1. **Publier l'application** (depuis votre machine locale) :
    Le plus simple pour la version 10 est de publier l'application en mode **Self-Contained**. Elle embarquera son propre runtime .NET 10, ce qui évite de l'installer sur le VPS.
    ```bash
-   dotnet publish -c Release -r linux-x64 --self-contained true -o ./publish
+   dotnet publish Cnss.MinimalApi.csproj -c Release -r linux-x64 --self-contained true -o ./publish 
    ```
 
 2. **Créer un service Systemd** :
