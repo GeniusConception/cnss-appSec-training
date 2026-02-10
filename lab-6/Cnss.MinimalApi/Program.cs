@@ -31,31 +31,8 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownProxies.Clear();
 });
 
-// --- Lab 6 : Étape 4 : Durcissement HSTS ---
-builder.Services.AddHsts(options =>
-{
-    options.Preload = true;
-    options.IncludeSubDomains = true;
-    options.MaxAge = TimeSpan.FromDays(365);
-});
-
 var app = builder.Build();
 
-// --- Lab 6 : Headers de Sécurité (Défense en profondeur) ---
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Append("X-Frame-Options", "DENY");
-    context.Response.Headers.Append("Content-Security-Policy", "default-src 'none'; script-src 'self'");
-    context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
-    context.Response.Headers.Append("Referrer-Policy", "no-referrer-when-downgrade");
-    context.Response.Headers.Append("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
-    
-    // On force aussi le HSTS manuellement pour la démo si nécessaire, 
-    // bien que .UseHsts() s'en chargera en Production.
-    context.Response.Headers.Append("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
-    
-    await next();
-});
 
 // Activation du middleware pour lire les en-têtes X-Forwarded-*
 app.UseForwardedHeaders();
