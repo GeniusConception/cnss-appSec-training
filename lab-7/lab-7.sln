@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnss.HmacClient", "Cnss.HmacClient\\Cnss.HmacClient.csproj", "{16B2E774-76EF-4549-8D4F-39AB9105D500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnss.HmacServer", "Cnss.HmacServer\\Cnss.HmacServer.csproj", "{EEB02077-71A3-442F-A866-B79DD3292AD5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16B2E774-76EF-4549-8D4F-39AB9105D500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B2E774-76EF-4549-8D4F-39AB9105D500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16B2E774-76EF-4549-8D4F-39AB9105D500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16B2E774-76EF-4549-8D4F-39AB9105D500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB02077-71A3-442F-A866-B79DD3292AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB02077-71A3-442F-A866-B79DD3292AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB02077-71A3-442F-A866-B79DD3292AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB02077-71A3-442F-A866-B79DD3292AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {363ED5F3-E163-4B1C-AE58-8D3477F23A0D}
+	EndGlobalSection
+EndGlobal
