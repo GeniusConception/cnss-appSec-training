@@ -67,6 +67,10 @@ votre-domaine.com {
         }
     }
 
+    # NOTE : La directive 'handle_path' supprime automatiquement le préfixe 
+    # (/lab6 ou /lab7) avant d'envoyer la requête au backend. 
+    # Ainsi, votre API reçoit bien '/api/transactions' et non '/lab7/api/transactions'.
+
     # Headers de sécurité globaux
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
